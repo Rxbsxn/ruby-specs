@@ -11,8 +11,7 @@ class NumeralTranslator
   end
 
   def translate
-    result = ''
-    ROMAN_NUMERALS_TRANSLATIONS.each { |_number, letter| result << extract_all_possible(letter) }
+    result = ROMAN_NUMERALS_TRANSLATIONS.inject('') { |s, (_number, letter)| s + extract_all_possible(letter) }
     convert_exceptions(result)
   end
 
@@ -36,5 +35,14 @@ class NumeralTranslator
   def arabic_equivalent(letter)
     return unless ROMAN_NUMERALS_TRANSLATIONS.value?(letter)
     ROMAN_NUMERALS_TRANSLATIONS.find { |_a_num, r_digit| r_digit == letter }.first
+  end
+
+  def exception_case?
+    arabic_input_to_s = @arabic_input.to_s
+    arabic_input_to_s.include?('4') || arabic_input_to_s.include?('9')
+  end
+
+  def exceptions
+    exception_case?
   end
 end
