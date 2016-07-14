@@ -1,18 +1,32 @@
 require 'roman_numerals'
 
-describe RomanNumerals do
-  describe '.to_roman' do
-    pending '1000 should give M'
-    pending '500 should give D'
-    pending '100 should give C'
-    pending '50 should give L'
-    pending '10 should give X'
-    pending '5 should give V'
-    pending '1 should give I'
-    pending '900 should give CM'
-    pending '400 should give CD'
-    pending '90 should give XC'
-    pending '40 should give XL'
-    pending '9 should give IX'
+describe NumeralTranslator do
+  let(:roman_numerals) { NumeralTranslator.new }
+
+  describe 'constant' do
+    pending 'returns correct roman numerals translations' do
+      expect(NumeralTranslator::ROMAN_NUMERALS_TRANSLAIONS).to eql(1 => 'I', 5 => 'V', 10 => 'X', 50 => 'L', 100 => 'C',
+                                                                   500 => 'D', 1000 => 'M')
+    end
+  end
+
+  describe '#translate' do
+    context 'when number end with "9"' do
+      pending 'returns corrrect roman number' do
+        expect(roman_numerals.translate(159)).to eql 'CLIX'
+      end
+    end
+
+    context 'when number contains "990"' do
+      pending 'returns corret roman number' do
+        expect(roman_numerals.translate(3992)).to eql 'MMMCMXCII'
+      end
+    end
+
+    context 'when number contains "444"' do
+      pending 'returns correct roman number' do
+        expect(roman_numerals.translate(444)).to eql 'CDXLIV'
+      end
+    end
   end
 end
